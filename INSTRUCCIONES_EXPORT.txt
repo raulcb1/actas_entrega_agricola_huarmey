@@ -1,0 +1,95 @@
+INSTRUCCIONES DE USO - ACTAS DE ENTREGA
+=======================================
+
+1. ABRIR EL SISTEMA
+-------------------
+Abre index.html.
+
+Desde el menu puedes entrar a:
+- Registrar acta
+- Buscar y reportes
+
+
+2. USAR EL HISTORICO CSV
+------------------------
+El archivo maestro es:
+
+datos_actas.csv
+
+En Registrar o Buscar usa:
+- Abrir datos_actas.csv: carga el historico desde archivo.
+- Exportar CSV: descarga una copia actualizada del historico.
+
+Si el navegador permite escritura directa, despues de abrir el CSV el sistema intentara guardar ahi mismo.
+Si el navegador no lo permite, guarda los cambios en el navegador y debes exportar el CSV actualizado.
+
+
+3. REGISTRAR O EDITAR ACTAS
+---------------------------
+En registrar.html:
+1. Completa datos del usuario.
+2. Completa los datos de Chip, Radio, Celular, Laptop y Observaciones.
+3. Presiona Guardar registro.
+
+Las zonas B2:M5 y B32:M44 del formato Excel no se modifican.
+
+
+4. BUSCAR Y REPORTAR
+--------------------
+En buscar.html puedes filtrar por:
+- Nombre
+- DNI
+- Equipo
+- Serie
+- IMEI
+- Rango de fechas
+
+Cada resultado permite:
+- Ver
+- Editar
+
+
+5. IMPRIMIR
+-----------
+En visualizar.html presiona Imprimir.
+
+Esta es la forma mas rapida porque evita exportar JSON y ejecutar scripts.
+
+
+6. GENERAR EXCEL DESDE CSV
+--------------------------
+Opcion facil:
+
+Haz doble clic en:
+generar_excel_desde_csv.bat
+
+Luego ingresa el ID del acta o presiona Enter para generar el acta mas reciente.
+
+Opcion por comando:
+
+powershell -ExecutionPolicy Bypass -File .\export_excel.ps1 -CsvFile .\datos_actas.csv
+
+Para un registro especifico:
+
+powershell -ExecutionPolicy Bypass -File .\export_excel.ps1 -CsvFile .\datos_actas.csv -RecordId ID_DEL_REGISTRO
+
+
+7. GENERAR EXCEL DESDE JSON
+---------------------------
+Desde visualizar.html puedes descargar el JSON del acta.
+
+Luego ejecuta:
+- generar_excel.vbs
+- generar_excel.bat
+
+O por comando:
+
+powershell -ExecutionPolicy Bypass -File .\export_excel.ps1 -JsonFile acta_entrega_xxxxx.json
+
+
+8. NOTAS IMPORTANTES
+--------------------
+- No se requiere instalar Node, Python ni paquetes externos.
+- Para generar Excel se necesita Microsoft Excel instalado.
+- Los navegadores no permiten escribir archivos locales sin permiso del usuario.
+- Exporta datos_actas.csv regularmente como respaldo.

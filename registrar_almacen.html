@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registrar Acta - Almacén</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-page="registrar_almacen">
+  <header class="page-header">
+    <img src="image1.png" alt="Logo Agricola Huarmey" class="logo" />
+    <div>
+      <h1>Acta de Almacén</h1>
+      <p>Registro de equipos para operación agrícola (Formato AH-FS-AD-AC-001).</p>
+    </div>
+  </header>
+
+  <nav class="main-menu" aria-label="Menu principal">
+    <a class="menu-link" href="index.html">Inicio</a>
+    <a class="menu-link active" href="registrar_almacen.html">Acta Almacén</a>
+    <a class="menu-link" href="registrar_ti.html">Acta TI</a>
+    <a class="menu-link" href="buscar.html">Buscar</a>
+  </nav>
+
+  <main>
+    <section class="card form-card">
+      <h2 id="form-title">Nuevo registro (Almacén)</h2>
+      <form id="delivery-form">
+        <input type="hidden" id="record-id" value="" />
+
+        <div class="field-grid">
+          <label>
+            Nombre del usuario
+            <input type="text" id="usuario_nombre" placeholder="Empieza a escribir..." required autocomplete="off" />
+          </label>
+          <label>
+            DNI / Documento
+            <input type="text" id="usuario_dni" placeholder="Número de documento" required />
+          </label>
+          <label>
+            Puesto / Cargo
+            <input type="text" id="usuario_puesto" placeholder="Puesto en la empresa" required />
+          </label>
+          <label>
+            Fecha de entrega
+            <input type="date" id="fecha_entrega" required />
+          </label>
+        </div>
+
+        <div class="equipment-section">
+          <h3>Chip para celular</h3>
+          <div class="field-grid">
+            <label>Número<input type="text" id="chip_numero" placeholder="Número del chip" /></label>
+          </div>
+        </div>
+
+        <div class="equipment-section">
+          <h3>Radio</h3>
+          <div class="field-grid">
+            <label>Marca<input type="text" id="radio_marca" placeholder="Marca" /></label>
+            <label>Modelo<input type="text" id="radio_modelo" placeholder="Modelo" /></label>
+            <label>Serie<input type="text" id="radio_serie" placeholder="Serie" /></label>
+            <label>Observaciones<input type="text" id="radio_obs" placeholder="Observaciones" /></label>
+          </div>
+        </div>
+
+        <div class="equipment-section">
+          <h3>Celular</h3>
+          <div class="field-grid">
+            <label>Marca<input type="text" id="celular_marca" placeholder="Marca" /></label>
+            <label>Modelo<input type="text" id="celular_modelo" placeholder="Modelo" /></label>
+            <label>IMEI<input type="text" id="celular_imei" placeholder="IMEI" /></label>
+            <label>Observaciones<input type="text" id="celular_obs" placeholder="Observaciones" /></label>
+          </div>
+        </div>
+
+        <div class="equipment-section">
+          <h3>Laptop</h3>
+          <div class="field-grid">
+            <label>Marca<input type="text" id="laptop_marca" placeholder="Marca" /></label>
+            <label>Modelo<input type="text" id="laptop_modelo" placeholder="Modelo" /></label>
+            <label>Serie<input type="text" id="laptop_serie" placeholder="Serie" /></label>
+            <label>Observaciones<input type="text" id="laptop_obs" placeholder="Observaciones" /></label>
+          </div>
+        </div>
+
+        <div class="equipment-section">
+          <h3>Observación general</h3>
+          <label class="full-width">
+            <textarea id="observaciones" rows="3" placeholder="Observaciones o notas adicionales"></textarea>
+          </label>
+        </div>
+
+        <div class="button-group">
+          <button type="submit" class="button primary">Guardar registro</button>
+          <button type="button" id="view-button" class="button accent">Visualizar e Imprimir</button>
+          <button type="button" id="clear-button" class="button tertiary">Limpiar formulario</button>
+        </div>
+      </form>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

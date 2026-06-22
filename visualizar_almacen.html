@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imprimir Acta de Entrega - Almacén</title>
+    <style>
+        /* Estilos generales y tipografía */
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            color: #000;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        .document-container {
+            width: 1050px; /* Ancho simulado de A4 horizontal */
+            margin: 0 auto;
+            background: #fff;
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            box-sizing: border-box;
+        }
+
+        /* Utilidades */
+        .bold { font-weight: bold; }
+        .text-center { text-align: center; }
+        .bg-gray { background-color: #f2f2f2; }
+        
+        /* Tablas generales */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+        th, td {
+            border: 1px solid #000;
+            padding: 5px;
+        }
+
+        /* Cabecera Principal */
+        .header-table td { padding: 6px; }
+        .logo-cell { width: 150px; text-align: center; }
+        .logo-cell img { max-width: 120px; }
+        .title-cell { text-align: center; font-size: 14px; font-weight: bold; }
+        .info-cell { width: 250px; font-size: 11px; line-height: 1.4; }
+
+        /* Sección de Fecha y Párrafo */
+        .date-section {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .date-text {
+            /*position: absolute;
+            bottom: 0;*/
+            width: 70px;
+            text-align: center;
+            border: 1px solid #000;
+            font-weight: bold;
+            padding: 3px 10px;
+            background-color: #f2f2f2;
+            height: 15px;
+        }
+        .date-box {
+            border: 1px solid #000;
+            padding: 3px 10px;
+            width: 150px;
+            text-align: center;
+            /*margin-left: 5px;*/
+            height: 15px;
+        }
+        .paragraph {
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: 13px;
+        }
+        .line-input {
+            font-weight: bold;
+            text-decoration: underline;
+            padding: 0 5px;
+        }
+
+        /* Cuadrícula de Equipos (Alineación estilo Excel) */
+        .equipment-container {
+            display: flex;
+            gap: 25px;
+            margin-bottom: 10px;
+        }
+        .col-1 { flex: 1;}
+        .col-2-3 { flex: 2; display: flex; flex-direction: column; }
+        .col-inner { display: flex; gap: 25px; }
+        .col-2, .col-3 { flex: 1; }
+
+        .field-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+        .field-label {
+            font-weight: bold;
+            font-size: 11px;
+            width: 70px; /* Fija el ancho de la etiqueta para que los recuadros se alineen */
+        }
+        .field-value {
+            border: 1px solid #000;
+            flex: 1; /* Hace que el recuadro se estire perfectamente llenando la columna */
+            margin-left: 10px;
+            height: 18px;
+            padding: 2px 5px;
+            display: flex;
+            align-items: center;
+        }
+        .field-check {
+            border: 1px solid #000;
+            /*flex: 1;*/ /* Hace que el recuadro se estire perfectamente llenando la columna */
+            margin-left: 10px;
+            height: 18px;
+            width: 100px;
+            padding: 2px 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Caja de Observación Grande */
+        .obs-large-box {
+            border: 1px solid #000;
+            height: 60px;
+            margin-top: 5px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .obs-title {
+            font-weight: bold;
+            border-bottom: 1px solid #000;
+            border-right: 1px solid #000;
+            display: inline-block;
+            padding: 2px 30px;
+            background-color: #f2f2f2;
+            width: max-content;
+        }
+
+        /* Firmas */
+        .disclaimer { margin: 10px 0; font-size: 11px; }
+        .signatures-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+            margin-bottom: 25px;
+            padding: 0 40px;
+        }
+        .sig-box {
+            width: 320px;
+            border: 1px solid #000;
+            height: 75px;
+            position: relative;
+        }
+        .sig-text {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            border-top: 1px solid #000;
+            font-weight: bold;
+            padding: 4px 0;
+            background-color: #f2f2f2;
+        }
+
+        /* Tablas Finales */
+        .approval-table th, .approval-table td { text-align: center; }
+        .control-table th, .control-table td { text-align: center; }
+        .control-title { font-style: italic; margin-bottom: 2px; font-size: 9px; }
+
+        /* Configuración de Impresión */
+        @media print {
+            body { background-color: #fff; padding: 0; }
+            .document-container { box-shadow: none; width: 100%; padding: 0; margin: 0; }
+            .no-print { display: none !important; }
+            * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+            @page { size: A4 landscape; margin: 12mm; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="document-container">
+        
+        <table class="header-table">
+            <tr>
+                <td rowspan="2" class="logo-cell">
+                    <img src="image1.png" alt="Agrícola Huarmey">
+                </td>
+                <td class="title-cell">ACTA DE ENTREGA</td>
+                <td class="info-cell" rowspan="2">
+                    <span class="bold">Código:</span> AH-FS-AD-AC-001<br>
+                    <span class="bold">Revisión:</span> 1.1<br>
+                    <span class="bold">Fecha aprobación:</span> 16/01/2025<br>
+                    <span class="bold">Páginas:</span> 1 de 1
+                </td>
+            </tr>
+            <tr>
+                <td class="title-cell">ENTREGA EQUIPOS DE COMUNICACIÓN</td>
+            </tr>
+        </table>
+
+        <div class="date-section">
+            
+            <div class="date-text">FECHA:</div>
+            <div class="date-box" id="val_fecha"></div>
+        </div>
+
+        <div class="paragraph">
+            Por medio del presente documento, al Sr. (a): <span class="line-input" id="val_nombre"></span> con DNI: <span class="line-input" id="val_dni"></span>,<br>
+            quien nos representa en la compañía en el puesto de - <span class="line-input" id="val_puesto"></span> se genera la entrega de lo siguiente:
+        </div>
+
+        <div class="equipment-container">
+            <div class="col-1">
+                <div class="field-row"><span class="field-label">CHIP NUEVO</span><div class="field-check"></div></div>
+                <div class="field-row"><span class="field-label">NUMERO:</span><div class="field-value" id="val_chip_numero"></div></div>
+                <br>
+                <div class="field-row"><span class="field-label">RADIO</span><div class="field-value"></div></div>
+                <div class="field-row"><span class="field-label">MARCA:</span><div class="field-value" id="val_radio_marca"></div></div>
+                <div class="field-row"><span class="field-label">MODELO:</span><div class="field-value" id="val_radio_modelo"></div></div>
+                <div class="field-row"><span class="field-label">SERIE:</span><div class="field-value" id="val_radio_serie"></div></div>
+                <div class="field-row"><span class="field-label">OBS.:</span><div class="field-value" id="val_radio_obs"></div></div>
+            </div>
+
+            <div class="col-2-3">
+                <div class="col-inner">
+                    <div class="col-2">
+                        <div class="field-row"><span class="field-label">CELULAR</span><div class="field-check"></div></div>
+                        <div class="field-row"><span class="field-label">MARCA:</span><div class="field-value text-center" id="val_cel_marca"></div></div>
+                        <div class="field-row"><span class="field-label">MODELO:</span><div class="field-value text-center" id="val_cel_modelo"></div></div>
+                        <div class="field-row"><span class="field-label">IMEI:</span><div class="field-value text-center" id="val_cel_imei"></div></div>
+                        <div class="field-row"><span class="field-label">OBS.:</span><div class="field-value text-center" id="val_cel_obs"></div></div>
+                    </div>
+                    <div class="col-3">
+                        <div class="field-row"><span class="field-label">LAPTOP</span><div class="field-check"></div></div>
+                        <div class="field-row"><span class="field-label">MARCA:</span><div class="field-value" id="val_lap_marca"></div></div>
+                        <div class="field-row"><span class="field-label">MODELO:</span><div class="field-value" id="val_lap_modelo"></div></div>
+                        <div class="field-row"><span class="field-label">SERIE:</span><div class="field-value" id="val_lap_serie"></div></div>
+                        <div class="field-row"><span class="field-label">OBS.:</span><div class="field-value" id="val_lap_obs"></div></div>
+                    </div>
+                </div>
+                
+                <div class="obs-large-box">
+                    <div class="obs-title">OBSERVACION</div>
+                    <div style="padding: 4px; flex: 1;" id="val_observacion_general"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="disclaimer">
+            En caso de pérdida, daños causados al equipo por un mal manejo y/o imprudencia del usuario, será este quien asumirá el costo total del equipo.
+        </div>
+
+        <div class="signatures-container">
+            <div class="sig-box">
+                <div class="sig-text">ENTREGA CONFORME ALMACEN</div>
+            </div>
+            <div class="sig-box">
+                <div class="sig-text">RECIBI CONFORME USUARIO</div>
+            </div>
+        </div>
+
+        <table class="approval-table">
+            <tr class="bg-gray bold">
+                <td>ELABORADO POR:</td>
+                <td>REVISADO POR:</td>
+                <td>APROBADO POR:</td>
+            </tr>
+            <tr>
+                <td>Encargado Certificaciones</td>
+                <td>Encargado Certificaciones</td>
+                <td>Gerente de Operación Agrícola</td>
+            </tr>
+        </table>
+
+        <div class="control-title">Control de Cambios:</div>
+        <table class="control-table">
+            <tr class="bg-gray bold">
+                <td>VERSION</td>
+                <td>FECHA</td>
+                <td>DESCRIPCION DE CAMBIOS</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>9/01/2025</td>
+                <td>Elaboracion del Documento</td>
+            </tr>
+            <tr>
+                <td>1.1</td>
+                <td>16/01/2025</td>
+                <td>Se Modifico el codigo de asignacion</td>
+            </tr>
+        </table>
+
+    </div>
+
+    <script>
+        function renderActa(record) {
+            const setEl = (id, text) => { 
+                const el = document.getElementById(id); 
+                if (el) el.textContent = text || ''; 
+            };
+
+            // Formatear fecha a DD/MM/YYYY si es necesario
+            let fechaArr = (record.fecha_entrega || '').split('-');
+            let fechaStr = fechaArr.length === 3 ? `${fechaArr[2]}/${fechaArr[1]}/${fechaArr[0]}` : record.fecha_entrega;
+
+            // Datos del Usuario
+            setEl('val_fecha', fechaStr);
+            setEl('val_nombre', record.usuario_nombre);
+            setEl('val_dni', record.usuario_dni);
+            setEl('val_puesto', record.usuario_puesto);
+
+            // Equipos: Chip y Radio
+            setEl('val_chip_numero', record.chip_numero);
+            setEl('val_radio_marca', record.radio_marca);
+            setEl('val_radio_modelo', record.radio_modelo);
+            setEl('val_radio_serie', record.radio_serie);
+            setEl('val_radio_obs', record.radio_obs);
+
+            // Equipos: Celular
+            setEl('val_cel_marca', record.celular_marca);
+            setEl('val_cel_modelo', record.celular_modelo);
+            setEl('val_cel_imei', record.celular_imei);
+            setEl('val_cel_obs', record.celular_obs);
+
+            // Equipos: Laptop
+            setEl('val_lap_marca', record.laptop_marca);
+            setEl('val_lap_modelo', record.laptop_modelo);
+            setEl('val_lap_serie', record.laptop_serie);
+            setEl('val_lap_obs', record.laptop_obs);
+
+            // Observación final
+            setEl('val_observacion_general', record.observaciones);
+        }
+    </script>
+    
+    <script src="app.js"></script>
+</body>
+</html>

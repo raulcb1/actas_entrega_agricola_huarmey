@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registrar Acta - TI</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Estilos extra para hacer más compacto este formulario que es más grande */
+    .equipment-section h4 { margin: 1rem 0 0.5rem; color: var(--muted); border-bottom: 1px solid var(--border); padding-bottom: 0.25rem; }
+    .compact-grid { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+  </style>
+</head>
+<body data-page="registrar_ti">
+  <header class="page-header">
+    <img src="image1.png" alt="Logo Agricola Huarmey" class="logo" />
+    <div>
+      <h1>Acta de Tecnologías de la Información (TI)</h1>
+      <p>Entrega y devolución de equipos informáticos (Formato AH-FOR-067).</p>
+    </div>
+  </header>
+
+  <nav class="main-menu" aria-label="Menu principal">
+    <a class="menu-link" href="index.html">Inicio</a>
+    <a class="menu-link" href="registrar_almacen.html">Acta Almacén</a>
+    <a class="menu-link active" href="registrar_ti.html">Acta TI</a>
+    <a class="menu-link" href="buscar.html">Buscar</a>
+  </nav>
+
+  <main>
+    <section class="card form-card">
+      <h2 id="form-title">Nuevo registro (TI)</h2>
+      <form id="delivery-form">
+        <input type="hidden" id="record-id" value="" />
+
+        <div class="equipment-section">
+          <h3>Datos Generales de la Operación</h3>
+          <div class="field-grid">
+            <label>Nombre del trabajador<input type="text" id="usuario_nombre" placeholder="Empieza a escribir..." required autocomplete="off" /></label>
+            <label>DNI / Documento<input type="text" id="usuario_dni" placeholder="Número" required /></label>
+            <label>Cargo<input type="text" id="usuario_puesto" placeholder="Puesto" required /></label>
+            <label>Sede<input type="text" id="sede" placeholder="Ej. Olmos" required /></label>
+            <label>Fecha de operación<input type="date" id="fecha_entrega" required /></label>
+            <label>Tipo de Operación
+              <select id="tipo_operacion" required>
+                <option value="Entrega">Entrega</option>
+                <option value="Devolución">Devolución</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="equipment-section">
+          <h3>Equipos Principales</h3>
+          
+          <h4>Laptop</h4>
+          <div class="field-grid compact-grid">
+            <label>Marca<input type="text" id="laptop_marca" /></label>
+            <label>Modelo<input type="text" id="laptop_modelo" /></label>
+            <label>Serie<input type="text" id="laptop_serie" /></label>
+            <label>Condición<input type="text" id="laptop_condicion" placeholder="Ej. Nuevo, Usado" /></label>
+            <label>Valor Ref.<input type="text" id="laptop_valor" /></label>
+            <label>Obs.<input type="text" id="laptop_obs" /></label>
+          </div>
+
+          <h4>Cargador de Laptop</h4>
+          <div class="field-grid compact-grid">
+            <label>Marca<input type="text" id="cargador_laptop_marca" /></label>
+            <label>Modelo<input type="text" id="cargador_laptop_modelo" /></label>
+            <label>Serie<input type="text" id="cargador_laptop_serie" /></label>
+            <label>Condición<input type="text" id="cargador_laptop_condicion" /></label>
+            <label>Valor Ref.<input type="text" id="cargador_laptop_valor" /></label>
+            <label>Obs.<input type="text" id="cargador_laptop_obs" /></label>
+          </div>
+
+          <h4>Celular</h4>
+          <div class="field-grid compact-grid">
+            <label>Marca<input type="text" id="celular_marca" /></label>
+            <label>Modelo<input type="text" id="celular_modelo" /></label>
+            <label>IMEI<input type="text" id="celular_imei" /></label>
+            <label>Condición<input type="text" id="celular_condicion" /></label>
+            <label>Valor Ref.<input type="text" id="celular_valor" /></label>
+            <label>Obs.<input type="text" id="celular_obs" /></label>
+          </div>
+
+          <h4>Cargador Celular</h4>
+          <div class="field-grid compact-grid">
+            <label>Marca<input type="text" id="cargador_cel_marca" /></label>
+            <label>Modelo<input type="text" id="cargador_cel_modelo" /></label>
+            <label>Serie<input type="text" id="cargador_cel_serie" /></label>
+            <label>Condición<input type="text" id="cargador_cel_condicion" /></label>
+            <label>Valor Ref.<input type="text" id="cargador_cel_valor" /></label>
+            <label>Obs.<input type="text" id="cargador_cel_obs" /></label>
+          </div>
+
+          <h4>Tarjeta SIM (Chip)</h4>
+          <div class="field-grid compact-grid">
+            <label>Operador<input type="text" id="sim_marca" /></label>
+            <label>Número<input type="text" id="sim_numero" /></label>
+            <label>Condición<input type="text" id="sim_condicion" /></label>
+            <label>Valor Ref.<input type="text" id="sim_valor" /></label>
+            <label>Obs.<input type="text" id="sim_obs" /></label>
+          </div>
+        </div>
+
+        <div class="equipment-section">
+          <h3>Periféricos</h3>
+          
+          <h4>Monitor</h4>
+          <div class="field-grid compact-grid">
+            <label>Marca<input type="text" id="monitor_marca" /></label>
+            <label>Modelo<input type="text" id="monitor_modelo" /></label>
+            <label>Serie<input type="text" id="monitor_serie" /></label>
+            <label>Condición<input type="text" id="monitor_condicion" /></label>
+            <label>Valor Ref.<input type="text" id="monitor_valor" /></label>
+            <label>Obs.<input type="text" id="monitor_obs" /></label>
+          </div>
+
+          <h4>Teclado</h4>
+          <div class="field-grid compact-grid">
+            <label>Marca<input type="text" id="teclado_marca" /></label>
+            <label>Modelo<input type="text" id="teclado_modelo" /></label>
+            <label>Serie<input type="text" id="teclado_serie" /></label>
+            <label>Condición<input type="text" id="teclado_condicion" /></label>
+            <label>Valor Ref.<input type="text" id="teclado_valor" /></label>
+            <label>Obs.<input type="text" id="teclado_obs" /></label>
+          </div>
+
+          <h4>Mouse</h4>
+          <div class="field-grid compact-grid">
+            <label>Marca<input type="text" id="mouse_marca" /></label>
+            <label>Modelo<input type="text" id="mouse_modelo" /></label>
+            <label>Serie<input type="text" id="mouse_serie" /></label>
+            <label>Condición<input type="text" id="mouse_condicion" /></label>
+            <label>Valor Ref.<input type="text" id="mouse_valor" /></label>
+            <label>Obs.<input type="text" id="mouse_obs" /></label>
+          </div>
+        </div>
+
+        <div class="equipment-section">
+          <h3>Otros Equipos Adicionales</h3>
+          <p style="font-size: 0.85rem; color: var(--muted); margin-top: 0;">(Si entregas algo que no está en la lista anterior, regístralo aquí)</p>
+          
+          <div class="field-grid compact-grid" style="margin-bottom: 1rem;">
+            <label>¿Qué equipo es?<input type="text" id="otro1_tipo" placeholder="Ej. Radio, Hub USB" /></label>
+            <label>Marca<input type="text" id="otro1_marca" /></label>
+            <label>Modelo<input type="text" id="otro1_modelo" /></label>
+            <label>Serie/IMEI<input type="text" id="otro1_serie" /></label>
+            <label>Condición<input type="text" id="otro1_condicion" /></label>
+            <label>Valor Ref.<input type="text" id="otro1_valor" /></label>
+            <label>Obs.<input type="text" id="otro1_obs" class="full-width" /></label>
+          </div>
+
+          <div class="field-grid compact-grid">
+            <label>¿Qué equipo es?<input type="text" id="otro2_tipo" placeholder="Ej. Mochila, Candado" /></label>
+            <label>Marca<input type="text" id="otro2_marca" /></label>
+            <label>Modelo<input type="text" id="otro2_modelo" /></label>
+            <label>Serie/IMEI<input type="text" id="otro2_serie" /></label>
+            <label>Condición<input type="text" id="otro2_condicion" /></label>
+            <label>Valor Ref.<input type="text" id="otro2_valor" /></label>
+            <label>Obs.<input type="text" id="otro2_obs" class="full-width" /></label>
+          </div>
+        </div>
+
+        <div class="button-group">
+          <button type="submit" class="button primary">Guardar registro</button>
+          <button type="button" id="clear-button" class="button tertiary">Limpiar formulario</button>
+        </div>
+      </form>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

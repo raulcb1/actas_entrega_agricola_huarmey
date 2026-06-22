@@ -1,0 +1,32 @@
+{
+  "id": "b925acd2-7afe-46d8-bf33-7ce429a8e160",
+  "createdAt": "2026-06-16T21:53:25.988Z",
+  "usuario_nombre": "Raul PCCB",
+  "usuario_dni": "41400877",
+  "usuario_puesto": "SIS",
+  "fecha_entrega": "2026-06-16",
+  "equipos": {
+    "chip": {
+      "numero": "995622696"
+    },
+    "radio": {
+      "marca": "",
+      "modelo": "",
+      "serie": "",
+      "obs": ""
+    },
+    "celular": {
+      "marca": "",
+      "modelo": "",
+      "imei": "",
+      "obs": ""
+    },
+    "laptop": {
+      "marca": "",
+      "modelo": "",
+      "serie": "",
+      "obs": ""
+    }
+  },
+  "observaciones": "test"
+}

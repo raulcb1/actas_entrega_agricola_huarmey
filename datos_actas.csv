@@ -1,0 +1,4 @@
+id,createdAt,usuario_nombre,usuario_dni,usuario_puesto,fecha_entrega,chip_numero,radio_marca,radio_modelo,radio_serie,radio_obs,celular_marca,celular_modelo,celular_imei,celular_obs,laptop_marca,laptop_modelo,laptop_serie,laptop_obs,observaciones
+83e9dc33-8aaa-4bf5-a694-21bb0067dc97,2026-06-17T14:35:10.561Z,José Daniel Aldana Curo,73888561,-,2026-06-15,987969590,,,,,HONOR,NIC-LX3,866464082450744,IMEI2: 866464082950743,,,,,
+9801a0d1-f588-4190-9e3d-c24f825dc800,2026-06-16T21:53:11.803Z,Raul PCCB,41400877,SIS,2026-06-16,,,,,,,,,,,,,,test
+90a071c4-3a5b-41cd-be2f-5b81a457fa16,2026-06-16T20:10:46.305Z,Raul Cuentas Barbaran,41400877,Asistente TI,2026-06-15,987975351,CLARO,,,,,,,,,,,,

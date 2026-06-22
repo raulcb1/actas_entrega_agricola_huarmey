@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Buscar Actas - Agrícola Huarmey</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-page="buscar">
+  <header class="page-header">
+    <img src="image1.png" alt="Logo Agricola Huarmey" class="logo" />
+    <div>
+      <h1>Buscar y reportes</h1>
+      <p>Consulte el histórico de entregas y devoluciones de equipos.</p>
+    </div>
+  </header>
+
+  <nav class="main-menu" aria-label="Menu principal">
+    <a class="menu-link" href="index.html">Inicio</a>
+    <a class="menu-link" href="registrar_almacen.html">Acta Almacén</a>
+    <a class="menu-link" href="registrar_ti.html">Acta TI</a>
+    <a class="menu-link active" href="buscar.html">Buscar</a>
+  </nav>
+
+  <main>
+    <section class="card">
+      <h2>Filtros</h2>
+      <div class="field-grid">
+        <label>
+          Buscar (Texto)
+          <input type="search" id="search-text" placeholder="Nombre, DNI, equipo, serie, imei..." />
+        </label>
+        <label>
+          Tipo de Operación
+          <select id="filter-operacion">
+            <option value="">Todas</option>
+            <option value="Entrega">Entrega</option>
+            <option value="Devolución">Devolución</option>
+          </select>
+        </label>
+        <label>
+          Desde (Fecha)
+          <input type="date" id="date-from" />
+        </label>
+        <label>
+          Hasta (Fecha)
+          <input type="date" id="date-to" />
+        </label>
+      </div>
+      <div class="button-group">
+        <button type="button" id="clear-filters-button" class="button tertiary">Limpiar filtros</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="section-header">
+        <h2>Resultados</h2>
+        <span id="report-count" class="count-badge">0</span>
+      </div>
+      <div class="table-wrap">
+        <table class="records-table">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Usuario</th>
+              <th>DNI</th>
+              <th>Puesto</th>
+              <th>Equipos</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="records-table-body"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

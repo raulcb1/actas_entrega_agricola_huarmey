@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imprimir Acta TI</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            color: #000;
+            margin: 0;
+            padding: 10px;
+            background-color: #f4f4f4;
+        }
+
+        .document-container {
+            width: 794px;
+            /* Ancho simulado de A4 Vertical (Portrait) */
+            margin: 0 auto;
+            background: #fff;
+            padding: 25px 35px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* Cabecera Principal */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+        }
+
+        th,
+        td {
+            border: 1px solid #000;
+            padding: 3px;
+        }
+
+        .header-table td {
+            padding: 4px;
+        }
+
+        .logo-cell {
+            width: 120px;
+            text-align: center;
+        }
+
+        .logo-cell img {
+            max-width: 90px;
+        }
+
+        .title-cell {
+            text-align: center;
+            font-size: 13px;
+            font-weight: bold;
+            line-height: 1.2;
+        }
+
+        .info-cell {
+            width: 220px;
+            font-size: 10px;
+            line-height: 1.2;
+        }
+
+        /* Información General */
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .paragraph {
+            line-height: 1.4;
+            margin-bottom: 10px;
+            text-align: justify;
+        }
+
+        /* Tabla de Equipos */
+        .equip-table th {
+            background-color: #f2f2f2;
+            text-align: center;
+            font-size: 10px;
+        }
+
+        .equip-table td {
+            font-size: 10px;
+            height: 16px;
+        }
+
+        .type-operation {
+            display: flex;
+            justify-content: space-between;
+            font-weight: normal;
+            font-size: 9px;
+            padding: 1px;
+        }
+
+        .box {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border: 1px solid #000;
+            text-align: center;
+            line-height: 10px;
+            font-weight: bold;
+        }
+
+        /* Términos y condiciones */
+        .terms-title {
+            font-weight: bold;
+            margin-bottom: 4px;
+            text-decoration: underline;
+            font-size: 10.5px;
+        }
+
+        .terms-list {
+            padding-left: 20px;
+            margin-bottom: 10px;
+            text-align: justify;
+            font-size: 9.5px;
+        }
+
+        .terms-list li {
+            margin-bottom: 3px;
+        }
+
+        /* Configuración de Impresión */
+        @media print {
+            body {
+                background-color: #fff;
+                padding: 0;
+            }
+
+            .document-container {
+                box-shadow: none;
+                width: 100%;
+                padding: 0;
+                margin: 0;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            /* Se redujo el margen a 10mm para dar más espacio vertical */
+            @page {
+                size: A4 portrait;
+                margin: 10mm;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="document-container">
+
+        <table border="1" style="border-collapse: collapse; width: 100%;" class="header-table">
+            <tr>
+                <td rowspan="2" class="logo-cell">
+                    <img src="image2.png" alt="Logo" style="max-width: 100px; height: auto;">
+                </td>
+
+                <td class="title-cell">FORMATO</td>
+
+                <td rowspan="2" style="width: 135px;" class="info-cell">
+                    <span class="bold">Código:</span> AH-FOR-067<br>
+                    <span class="bold">Versión:</span> V1<br>
+                    <span class="bold">F. Aprobación:</span> 31/03/2026<br>
+                    <span class="bold">Página:</span> 1/1
+                </td>
+            </tr>
+
+            <tr>
+                <td class="title-cell">ENTREGA Y DEVOLUCIÓN DE EQUIPOS INFORMÁTICOS</td>
+            </tr>
+        </table>
+
+
+        <div class="info-row">
+            <div>FECHA DE ENTREGA: <span style="font-weight: normal; text-decoration: underline;" id="val_fecha"></span>
+            </div>
+            <div>SEDE: <span style="font-weight: normal; text-decoration: underline;" id="val_sede"></span></div>
+        </div>
+
+        <div class="paragraph">
+            Por medio del presente documento se deja constancia de que el/la Sr.(a) <span class="bold"
+                id="val_nombre"></span>, identificado(a) con DNI N.° <span class="bold" id="val_dni"></span>, quien
+            desempeña el cargo de <span class="bold" id="val_puesto"></span> en la compañía, recibe a conformidad lo
+            siguiente:
+        </div>
+
+        <table class="equip-table">
+            <tr>
+                <th rowspan="2" style="width: 18%;">Equipo / Accesorio</th>
+                <th rowspan="2" style="width: 12%;">Marca</th>
+                <th rowspan="2" style="width: 15%;">Modelo</th>
+                <th rowspan="2" style="width: 15%;">Serie/Imei</th>
+                <th rowspan="2" style="width: 10%;">Condición</th>
+                <th rowspan="2" style="width: 10%;">Valor del Equipo</th>
+                <th style="width: 20%;">Observaciones</th>
+            </tr>
+            <tr>
+                <th>
+                    <div class="type-operation">
+                        <span>Entrega <span class="box" id="check_entrega"></span></span>
+                        <span>Devolución <span class="box" id="check_devolucion"></span></span>
+                    </div>
+                </th>
+            </tr>
+
+            <tr>
+                <td class="bold">Laptop</td>
+                <td id="val_laptop_marca"></td>
+                <td id="val_laptop_modelo"></td>
+                <td id="val_laptop_serie"></td>
+                <td id="val_laptop_condicion"></td>
+                <td class="text-center" id="val_laptop_valor"></td>
+                <td id="val_laptop_obs"></td>
+            </tr>
+            <tr>
+                <td class="bold">Cargador Laptop</td>
+                <td id="val_cargador_laptop_marca"></td>
+                <td id="val_cargador_laptop_modelo"></td>
+                <td id="val_cargador_laptop_serie"></td>
+                <td id="val_cargador_laptop_condicion"></td>
+                <td class="text-center" id="val_cargador_laptop_valor"></td>
+                <td id="val_cargador_laptop_obs"></td>
+            </tr>
+            <tr>
+                <td class="bold">Celular</td>
+                <td id="val_celular_marca"></td>
+                <td id="val_celular_modelo"></td>
+                <td id="val_celular_serie"></td>
+                <td id="val_celular_condicion"></td>
+                <td class="text-center" id="val_celular_valor"></td>
+                <td id="val_celular_obs"></td>
+            </tr>
+            <tr>
+                <td class="bold">Cargador Cel.</td>
+                <td id="val_cargador_cel_marca"></td>
+                <td id="val_cargador_cel_modelo"></td>
+                <td id="val_cargador_cel_serie"></td>
+                <td id="val_cargador_cel_condicion"></td>
+                <td class="text-center" id="val_cargador_cel_valor"></td>
+                <td id="val_cargador_cel_obs"></td>
+            </tr>
+            <tr>
+                <td class="bold">Tarjeta SIM</td>
+                <td id="val_sim_marca"></td>
+                <td id="val_sim_modelo"></td>
+                <td id="val_sim_serie"></td>
+                <td id="val_sim_condicion"></td>
+                <td class="text-center" id="val_sim_valor"></td>
+                <td id="val_sim_obs"></td>
+            </tr>
+            <tr>
+                <td class="bold">Monitor</td>
+                <td id="val_monitor_marca"></td>
+                <td id="val_monitor_modelo"></td>
+                <td id="val_monitor_serie"></td>
+                <td id="val_monitor_condicion"></td>
+                <td class="text-center" id="val_monitor_valor"></td>
+                <td id="val_monitor_obs"></td>
+            </tr>
+            <tr>
+                <td class="bold">Teclado</td>
+                <td id="val_teclado_marca"></td>
+                <td id="val_teclado_modelo"></td>
+                <td id="val_teclado_serie"></td>
+                <td id="val_teclado_condicion"></td>
+                <td class="text-center" id="val_teclado_valor"></td>
+                <td id="val_teclado_obs"></td>
+            </tr>
+            <tr>
+                <td class="bold">Mouse</td>
+                <td id="val_mouse_marca"></td>
+                <td id="val_mouse_modelo"></td>
+                <td id="val_mouse_serie"></td>
+                <td id="val_mouse_condicion"></td>
+                <td class="text-center" id="val_mouse_valor"></td>
+                <td id="val_mouse_obs"></td>
+            </tr>
+            <tr>
+                <td class="bold">Otro: <span style="font-weight: normal" id="val_otro1_tipo"></span></td>
+                <td id="val_otro1_marca"></td>
+                <td id="val_otro1_modelo"></td>
+                <td id="val_otro1_serie"></td>
+                <td id="val_otro1_condicion"></td>
+                <td class="text-center" id="val_otro1_valor"></td>
+                <td id="val_otro1_obs"></td>
+            </tr>
+            <tr>
+                <td class="bold">Otro: <span style="font-weight: normal" id="val_otro2_tipo"></span></td>
+                <td id="val_otro2_marca"></td>
+                <td id="val_otro2_modelo"></td>
+                <td id="val_otro2_serie"></td>
+                <td id="val_otro2_condicion"></td>
+                <td class="text-center" id="val_otro2_valor"></td>
+                <td id="val_otro2_obs"></td>
+            </tr>
+        </table>
+
+        <div class="terms-title">Términos y condiciones de aceptación:</div>
+        <ul class="terms-list">
+            <li>En caso de daño o robo por negligencia, el usuario será responsable de su reposición con un equipo de
+                iguales o superiores características y deberá informar de inmediato a su jefe directo y al área de
+                Gestión humana adjuntando la denuncia policial cuando corresponda. Si el modelo se encuentre
+                descontinuado la reposición será por un importe equivalente al costo del mismo teniendo en cuenta la
+                condición de entrega y depreciación.</li>
+            <li>Si la reposición no se realiza en un plazo máximo de 48 horas, el trabajador autoriza el descuento del
+                costo total en su planilla u otra retribución, pudiendo coordinar facilidades de pago con el área de
+                Gestión Humana.</li>
+            <li>Se considera daño por negligencia cuando el usuario ejecuta acciones ajenas al uso adecuado del equipo,
+                tales como dejarlo caer, colocarlo en zonas de riesgo, exponerlo a líquidos o utilizar conexiones
+                eléctricas inadecuadas.</li>
+            <li>Se considera robo por negligencia cuando el equipo es extraviado, sustraído o robado fuera de las
+                instalaciones de la empresa sin encontrarse el usuario en funciones laborales o al haberlo expuesto a un
+                riesgo innecesario.</li>
+            <li>El valor del equipo es referencial a la condición y al valor del mismo en el mercado actual cuando se
+                efectúa la entrega.</li>
+        </ul>
+
+        <div class="paragraph">
+            En tal sentido firmo en señal de conformidad y autorizo expresamente al empleador para que se me retenga y
+            cobre de mi liquidación final, salarios e indemnizaciones los saldos que este adeudado, si llegara a
+            finalizar mi vínculo laboral antes de completar el pago por la reposición de equipo.
+        </div>
+
+        <div style="display: flex; justify-content: space-between; margin-top: 20px; margin-bottom: 10px;">
+            <div style="width: 38%; border: 1px solid #000; height: 60px; display: flex;">
+                <div style="flex: 1; position: relative;">
+                    <div
+                        style="position: absolute; bottom: 0; width: 100%; border-top: 1px solid #000; text-align: center; font-weight: bold; font-size: 10px; padding: 4px 0; background-color: #f2f2f2;">
+                        Trabajador (Firma)</div>
+                </div>
+                <div style="width: 60px; border-left: 1px solid #000; position: relative;">
+                    <div
+                        style="position: absolute; bottom: 0; width: 100%; border-top: 1px solid #000; text-align: center; font-weight: bold; font-size: 10px; padding: 4px 0; background-color: #f2f2f2;">
+                        Huella</div>
+                </div>
+            </div>
+            <div style="width: 28%; border: 1px solid #000; height: 60px; position: relative;">
+                <div
+                    style="position: absolute; bottom: 0; width: 100%; border-top: 1px solid #000; text-align: center; font-weight: bold; font-size: 10px; padding: 4px 0; background-color: #f2f2f2;">
+                    Jefe de TI</div>
+            </div>
+            <div style="width: 28%; border: 1px solid #000; height: 60px; position: relative;">
+                <div
+                    style="position: absolute; bottom: 0; width: 100%; border-top: 1px solid #000; text-align: center; font-weight: bold; font-size: 10px; padding: 4px 0; background-color: #f2f2f2;">
+                    Jefe de GH</div>
+            </div>
+        </div>
+
+        <div style="margin-top: 15px; margin-bottom: 15px; display: flex;">
+            <div style="border: 1px solid #000; display: flex; width: 275px; height: 22px;">
+                <div class="bold"
+                    style="background-color: #f2f2f2; padding: 4px 10px; border-right: 1px solid #000; line-height: 14px;">
+                    FECHA DE DEVOLUCIÓN:
+                </div>
+                <div style="flex: 1;"></div>
+            </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; margin-top: 10px; margin-bottom: 10px;">
+            <div style="width: 38%; border: 1px solid #000; height: 60px; display: flex;">
+                <div style="flex: 1; position: relative;">
+                    <div
+                        style="position: absolute; bottom: 0; width: 100%; border-top: 1px solid #000; text-align: center; font-weight: bold; font-size: 10px; padding: 4px 0; background-color: #f2f2f2;">
+                        Trabajador (Firma)</div>
+                </div>
+                <div style="width: 60px; border-left: 1px solid #000; position: relative;">
+                    <div
+                        style="position: absolute; bottom: 0; width: 100%; border-top: 1px solid #000; text-align: center; font-weight: bold; font-size: 10px; padding: 4px 0; background-color: #f2f2f2;">
+                        Huella</div>
+                </div>
+            </div>
+            <div style="width: 28%; border: 1px solid #000; height: 60px; position: relative;">
+                <div
+                    style="position: absolute; bottom: 0; width: 100%; border-top: 1px solid #000; text-align: center; font-weight: bold; font-size: 10px; padding: 4px 0; background-color: #f2f2f2;">
+                    Jefe de TI</div>
+            </div>
+            <div style="width: 28%; border: 1px solid #000; height: 60px; position: relative;">
+                <div
+                    style="position: absolute; bottom: 0; width: 100%; border-top: 1px solid #000; text-align: center; font-weight: bold; font-size: 10px; padding: 4px 0; background-color: #f2f2f2;">
+                    Jefe de GH</div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function renderActa(record) {
+            const setEl = (id, text) => {
+                const el = document.getElementById(id);
+                if (el) el.textContent = text || '';
+            };
+
+            // Formatear fecha a DD/MM/YYYY si es necesario
+            let fechaArr = (record.fecha_entrega || '').split('-');
+            let fechaStr = fechaArr.length === 3 ? `${fechaArr[2]}/${fechaArr[1]}/${fechaArr[0]}` : record.fecha_entrega;
+
+            setEl('val_fecha', fechaStr);
+            setEl('val_sede', record.sede);
+            setEl('val_nombre', record.usuario_nombre);
+            setEl('val_dni', record.usuario_dni);
+            setEl('val_puesto', record.usuario_puesto);
+
+            // Marcar con X el tipo de operación
+            if (record.tipo_operacion === 'Entrega') {
+                setEl('check_entrega', 'X');
+            } else if (record.tipo_operacion === 'Devolución') {
+                setEl('check_devolucion', 'X');
+            }
+
+            // Lista de prefijos para automatizar la carga de filas
+            const items = [
+                'laptop', 'cargador_laptop', 'celular', 'cargador_cel',
+                'monitor', 'teclado', 'mouse', 'otro1', 'otro2'
+            ];
+
+            items.forEach(prefix => {
+                setEl(`val_${prefix}_marca`, record[`${prefix}_marca`]);
+                setEl(`val_${prefix}_modelo`, record[`${prefix}_modelo`]);
+
+                // Excepción para celular que usa 'imei' en lugar de serie en el HTML/Formulario
+                if (prefix === 'celular') {
+                    setEl(`val_${prefix}_serie`, record[`${prefix}_imei`]);
+                } else {
+                    setEl(`val_${prefix}_serie`, record[`${prefix}_serie`]);
+                }
+
+                setEl(`val_${prefix}_condicion`, record[`${prefix}_condicion`]);
+                setEl(`val_${prefix}_valor`, record[`${prefix}_valor`]);
+                setEl(`val_${prefix}_obs`, record[`${prefix}_obs`]);
+            });
+
+            // Campos específicos para "Otros"
+            setEl('val_otro1_tipo', record.otro1_tipo);
+            setEl('val_otro2_tipo', record.otro2_tipo);
+
+            // Campo específico para SIM
+            setEl('val_sim_marca', record.sim_marca);
+            setEl('val_sim_modelo', record.sim_modelo);
+            setEl('val_sim_serie', record.sim_numero);
+            setEl('val_sim_condicion', record.sim_condicion);
+            setEl('val_sim_valor', record.sim_valor);
+            setEl('val_sim_obs', record.sim_obs);
+        }
+    </script>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

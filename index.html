@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Actas de Entrega - Agrícola Huarmey</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-page="home">
+  <header class="page-header">
+    <img src="image1.png" alt="Logo Agricola Huarmey" class="logo" />
+    <div>
+      <h1>Actas de Entrega</h1>
+      <p>Registro, búsqueda e impresión de asignaciones de equipos.</p>
+    </div>
+  </header>
+
+  <nav class="main-menu" aria-label="Menu principal">
+    <a class="menu-link" href="registrar_almacen.html">Acta Almacén</a>
+    <a class="menu-link" href="registrar_ti.html">Acta TI</a>
+    <a class="menu-link" href="buscar.html">Buscar y reportes</a>
+  </nav>
+
+  <main class="home-grid">
+    <section class="card intro-card">
+      <h2>Gestión de préstamos y asignaciones</h2>
+      <p>El sistema ahora utiliza una base de datos unificada (<strong>base_datos.json</strong>) para todos los formatos y usuarios.</p>
+      <div class="button-group">
+        <a class="button primary" href="registrar_almacen.html">Nueva Acta Almacén</a>
+        <a class="button accent" href="registrar_ti.html">Nueva Acta TI</a>
+        <a class="button secondary" href="buscar.html">Ver histórico</a>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Mantenimiento</h2>
+      <p id="data-status" style="font-weight: bold; color: var(--primary);">Calculando registros...</p>
+      <p style="font-size: 0.9rem; color: var(--muted);">Usa esta opción si el sistema se queda con datos antiguos o quieres cargar una base de datos desde cero.</p>
+      <div class="button-group">
+        <button type="button" id="clear-local-db-button" class="button" style="background-color: var(--danger); color: white;">Limpiar base de datos del navegador</button>
+        <button type="button" id="open-db-button" class="button secondary">Cargar JSON</button>
+        <button type="button" id="export-db-button" class="button tertiary">Exportar JSON</button>
+        <input type="file" id="csv-file-input" accept=".json,application/json" hidden />
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
